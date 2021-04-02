@@ -14,6 +14,32 @@ export default class CoreContentUtil {
         return time;
     }
 
+    public static getAllText(content: Content): string {
+        let sb = '';
+        if (null != content) {
+            const sections = content.sections;
+            if (null != sections) {
+                for (const s of sections) {
+                    const items = s.items;
+                    if (null != items) {
+                        for (const i of items) {
+                            if (Item.TYPE_TEXT === (i.type)) {
+                                sb = sb + (i.value);
+                            }
+                            if (Item.TYPE_FACE === (i.type)) {
+                                sb = sb + ('[表情]');
+                            }
+                            if (Item.TYPE_IMAGE === (i.type)) {
+                                sb = sb + ('[图片]');
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return sb.toString();
+    }
+
     public static getText(content: Content): string {
         let sb = '';
         if (null != content) {
